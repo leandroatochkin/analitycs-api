@@ -1,6 +1,11 @@
 import "dotenv/config";
 import Fastify from "fastify";
-import { gapOpportunitiesData } from "./routes/gapOpportunities.controller";
+import { getMarketGapsData } from "./routes/getMarketGaps.controller";
+import { getOpportunitiesData } from "./routes/getOpportunities.controller";
+import { getStoreIndexData } from "./routes/getStoreIndex.controller";
+import { getPriceTrendsData } from "./routes/getPriceTrends.controller";
+import { getBrandPenetrationData } from "./routes/getBrandPenetration.controller";
+
 
 
 export const app = Fastify({
@@ -13,9 +18,15 @@ app.get("/health", async () => {
   console.log("API healthy")
 });
 
+const urlPrefix = "/api"
+
 const start = async () => {
 
-  await app.register(gapOpportunitiesData, { prefix: "/api" });
+  await app.register(getMarketGapsData, { prefix: urlPrefix });
+  await app.register(getOpportunitiesData, { prefix: urlPrefix })
+  await app.register(getStoreIndexData, { prefix: urlPrefix })
+  await app.register(getPriceTrendsData, { prefix: urlPrefix })
+  await app.register(getBrandPenetrationData, { prefix: urlPrefix })
 
   // 2. Register Error Handler (MUST BE BEFORE LISTEN)
   app.setErrorHandler((error: any, request, reply) => {
