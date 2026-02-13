@@ -5,6 +5,8 @@ import { getOpportunitiesData } from "./routes/getOpportunities.controller";
 import { getStoreIndexData } from "./routes/getStoreIndex.controller";
 import { getPriceTrendsData } from "./routes/getPriceTrends.controller";
 import { getBrandPenetrationData } from "./routes/getBrandPenetration.controller";
+import { getDemandForecastData } from "./routes/getDemandForecast.controller";
+import { getCategoryGrowthData } from "./routes/getCategoryGrowth.controller";
 
 
 
@@ -27,6 +29,8 @@ const start = async () => {
   await app.register(getStoreIndexData, { prefix: urlPrefix })
   await app.register(getPriceTrendsData, { prefix: urlPrefix })
   await app.register(getBrandPenetrationData, { prefix: urlPrefix })
+  await app.register(getDemandForecastData, { prefix: urlPrefix })
+  await app.register(getCategoryGrowthData, { prefix: urlPrefix })
 
   // 2. Register Error Handler (MUST BE BEFORE LISTEN)
   app.setErrorHandler((error: any, request, reply) => {
